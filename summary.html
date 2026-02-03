@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>كبار الشخصيات - ملخص الطلب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { "primary": "#800020" } } } }
+
+        window.onload = function() {
+            const data = JSON.parse(localStorage.getItem('orderData'));
+            if(!data) window.location.href = 'order.html';
+            
+            document.getElementById('show-name').innerText = data.name;
+            document.getElementById('show-phone').innerText = data.phone;
+            document.getElementById('show-neck').innerText = data.neck + " سم";
+            document.getElementById('show-shoulder').innerText = data.shoulder + " سم";
+            document.getElementById('show-chest').innerText = data.chest + " سم";
+            document.getElementById('show-sleeve').innerText = data.sleeve + " سم";
+            document.getElementById('show-length').innerText = data.length + " سم";
+        }
+
+        function sendToWhatsApp() {
+            const d = JSON.parse(localStorage.getItem('orderData'));
+            const text = `*طلب تفصيل جديد - كبار الشخصيات*%0A` +
+                         `--------------------------%0A` +
+                         `👤 الاسم: ${d.name}%0A` +
+                         `📞 الجوال: ${d.phone}%0A%0A` +
+                         `📏 *المقاسات:*%0A` +
+                         `- الرقبة: ${d.neck} سم%0A` +
+                         `- الكتف: ${d.shoulder} سم%0A` +
+                         `- الصدر: ${d.chest} سم%0A` +
+                         `- الكم: ${d.sleeve} سم%0A` +
+                         `- الطول: ${d.length} سم%0A%0A` +
+                         `شكراً لكم.`;
+            
+            window.open(`https://wa.me/967771671722?text=${text}`, '_blank');
+        }
+    </script>
+</head>
+<body class="bg-slate-50 min-h-screen font-['Tajawal']">
+    <main class="max-w-md mx-auto p-6 space-y-6">
+        <div class="text-center py-8">
+            <div class="size-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                <span class="material-symbols-outlined text-4xl">task_alt</span>
+            </div>
+            <h1 class="text-2xl font-bold text-slate-900">ملخص طلبك</h1>
+            <p class="text-slate-500">راجع بياناتك قبل الإرسال النهائي</p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 shadow-xl shadow-slate-200/50 space-y-4 border border-slate-100">
+            <div class="flex justify-between border-b pb-3"><span class="text-slate-500">الاسم</span> <span id="show-name" class="font-bold"></span></div>
+            <div class="flex justify-between border-b pb-3"><span class="text-slate-500">الجوال</span> <span id="show-phone" class="font-bold"></span></div>
+            
+            <h3 class="font-bold pt-4 text-primary">تفاصيل المقاسات:</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-slate-50 p-3 rounded-xl text-center">
+                    <div class="text-xs text-slate-400">الرقبة</div>
+                    <div id="show-neck" class="font-bold"></div>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl text-center">
+                    <div class="text-xs text-slate-400">الكتف</div>
+                    <div id="show-shoulder" class="font-bold"></div>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl text-center">
+                    <div class="text-xs text-slate-400">الصدر</div>
+                    <div id="show-chest" class="font-bold"></div>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl text-center">
+                    <div class="text-xs text-slate-400">الكم</div>
+                    <div id="show-sleeve" class="font-bold"></div>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl text-center col-span-2">
+                    <div class="text-xs text-slate-400">الطول الكلي</div>
+                    <div id="show-length" class="font-bold text-lg"></div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="sendToWhatsApp()" class="w-full h-16 bg-[#25D366] text-white rounded-2xl font-bold flex items-center justify-center gap-3 shadow-lg hover:brightness-110 transition-all">
+            إرسال الطلب عبر واتساب
+            <span class="material-symbols-outlined">send</span>
+        </button>
+        
+        <a href="order.html" class="block text-center text-slate-400 text-sm font-medium">تعديل القياسات</a>
+    </main>
+</body>
+</html>
