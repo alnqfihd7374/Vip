@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>كبار الشخصيات - نموذج القياس</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { "primary": "#800020", "bg-cream": "#F5F5DC" } } } }
+        
+        function saveAndContinue() {
+            const data = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                neck: document.getElementById('neck').value,
+                shoulder: document.getElementById('shoulder').value,
+                chest: document.getElementById('chest').value,
+                sleeve: document.getElementById('sleeve').value,
+                length: document.getElementById('length').value
+            };
+            if(!data.name || !data.phone) { alert('يرجى إكمال البيانات الأساسية'); return; }
+            localStorage.setItem('orderData', JSON.stringify(data));
+            window.location.href = 'summary.html';
+        }
+    </script>
+</head>
+<body class="bg-bg-cream min-h-screen pb-24">
+    <header class="p-6 bg-white/50 backdrop-blur-sm sticky top-0 z-10 border-b border-primary/10">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <a href="index.html" class="text-primary"><span class="material-symbols-outlined">arrow_forward</span></a>
+            <h1 class="text-xl font-bold text-primary">نموذج القياس</h1>
+            <div class="size-8"></div>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto p-6 space-y-6">
+        <div class="bg-white p-6 rounded-3xl shadow-sm border border-primary/5">
+            <h2 class="text-lg font-bold mb-4 flex items-center gap-2"><span class="material-symbols-outlined">person</span> البيانات الأساسية</h2>
+            <div class="space-y-4">
+                <input id="name" type="text" placeholder="الاسم الكامل" class="w-full h-12 rounded-xl border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary">
+                <input id="phone" type="tel" placeholder="رقم الجوال" class="w-full h-12 rounded-xl border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary text-right" dir="ltr">
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-lg font-bold flex items-center justify-between px-2">
+                <span>القياسات (سم)</span>
+                <span class="text-xs bg-primary text-white px-2 py-1 rounded">دقيق</span>
+            </h2>
+            
+            <div class="bg-white p-4 rounded-2xl flex items-center gap-4 shadow-sm">
+                <div class="size-12 bg-primary/10 rounded-full flex items-center justify-center text-primary"><span class="material-symbols-outlined">straighten</span></div>
+                <div class="flex-1 text-sm font-bold">الرقبة (Neck)</div>
+                <input id="neck" type="number" placeholder="0" class="w-20 h-10 border-b-2 border-primary/20 focus:border-primary focus:ring-0 text-center font-bold">
+            </div>
+            
+            <div class="bg-white p-4 rounded-2xl flex items-center gap-4 shadow-sm">
+                <div class="size-12 bg-primary/10 rounded-full flex items-center justify-center text-primary"><span class="material-symbols-outlined">accessibility</span></div>
+                <div class="flex-1 text-sm font-bold">الكتف (Shoulder)</div>
+                <input id="shoulder" type="number" placeholder="0" class="w-20 h-10 border-b-2 border-primary/20 focus:border-primary focus:ring-0 text-center font-bold">
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl flex items-center gap-4 shadow-sm">
+                <div class="size-12 bg-primary/10 rounded-full flex items-center justify-center text-primary"><span class="material-symbols-outlined">checkroom</span></div>
+                <div class="flex-1 text-sm font-bold">الصدر (Chest)</div>
+                <input id="chest" type="number" placeholder="0" class="w-20 h-10 border-b-2 border-primary/20 focus:border-primary focus:ring-0 text-center font-bold">
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl flex items-center gap-4 shadow-sm">
+                <div class="size-12 bg-primary/10 rounded-full flex items-center justify-center text-primary"><span class="material-symbols-outlined">pan_tool_alt</span></div>
+                <div class="flex-1 text-sm font-bold">الكم (Sleeve)</div>
+                <input id="sleeve" type="number" placeholder="0" class="w-20 h-10 border-b-2 border-primary/20 focus:border-primary focus:ring-0 text-center font-bold">
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl flex items-center gap-4 shadow-sm">
+                <div class="size-12 bg-primary/10 rounded-full flex items-center justify-center text-primary"><span class="material-symbols-outlined">height</span></div>
+                <div class="flex-1 text-sm font-bold">الطول الكلي</div>
+                <input id="length" type="number" placeholder="0" class="w-20 h-10 border-b-2 border-primary/20 focus:border-primary focus:ring-0 text-center font-bold">
+            </div>
+        </div>
+    </main>
+
+    <footer class="fixed bottom-0 w-full p-4 bg-white/80 backdrop-blur-md border-t">
+        <button onclick="saveAndContinue()" class="w-full h-14 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+            مراجعة الملخص
+        </button>
+    </footer>
+</body>
+</html>
